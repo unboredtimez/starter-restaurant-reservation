@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { listReservations } from "../utils/api";
+import { listReservations, listTables } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
+import Reservation from "./Reservation";
+import Table from "./Table";
+import DateNavigation from "./NavigateDate";
 
 /**
  * Defines the dashboard page.
@@ -12,25 +15,59 @@ function Dashboard({ date }) {
   const [reservations, setReservations] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
 
+  const [tables, setTables] = useState([]);
+  const [tablesError, setTablesError] = useState(null);
+
   useEffect(loadDashboard, [date]);
 
   function loadDashboard() {
     const abortController = new AbortController();
     setReservationsError(null);
+    setTablesError(null);
     listReservations({ date }, abortController.signal)
       .then(setReservations)
       .catch(setReservationsError);
+    listTables(abortController.signal).then(setTables).catch(setTablesError);
     return () => abortController.abort();
   }
 
+  const reservationList = reservations.map((reservation) => {
+
+    if (reservation.status !== "seated") {
+      return (
+        <Reservation
+          loadDashboard={loadDashboard}
+          key={reservation.reservation_id}
+          reservation={reservation}
+        />
+      );
+    }
+  });
+
+  const tableList = tables.map((table) => (
+    <Table loadDashboard={loadDashboard} key={table.table_id} table={table} />
+  ));
+
   return (
     <main>
-      <h1>Dashboard</h1>
-      <div className="d-md-flex mb-3">
-        <h4 className="mb-0">Reservations for date</h4>
+      <div className="row">
+        <div className="col col-sm">
+          <div className="headers">Dashboard</div>
+          <h4 className="mb-4">Reservations for: {date}</h4>
+          <DateNavigation date={date} />
+          <ErrorAlert error={reservationsError} />
+          <ErrorAlert error={tablesError} />
+        </div>
+        <div className="col col-sm align-bottom">
+          <h2>Tables</h2>
+        </div>
       </div>
-      <ErrorAlert error={reservationsError} />
-      {JSON.stringify(reservations)}
+
+      <hr></hr>
+      <div className="row">
+        <div className="col col-sm">{reservationList}</div>
+        <div className="col col-sm">{tableList}</div>
+      </div>
     </main>
   );
 }
