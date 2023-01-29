@@ -33,7 +33,7 @@ function Seat() {
 
     setFormErrors(errors);
 
-    // **** Seat table API Call
+    // Seat table API Call
 
     updateTable(reservation_id, tableId, abortController.signal)
       .then((_) => {

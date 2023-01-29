@@ -62,25 +62,25 @@ function EditReservationForm() {
 
     if (Date.now() > Date.parse(reservationDate)) {
       errors.push({
-        message: `Reservation must be for a future date or time.`,
+        message: `Reservation must be for a future date or time. We can't time travel back in time yet.`,
       });
     }
 
     if (reservationDate.getDay() === 2) {
       errors.push({
-        message: `Periodic Tables is closed on Tuesdays. Sorry!`,
+        message: `Periodic Tables is closed on Tuesdays. Sorry! Please choose a different Date`,
       });
     }
 
     if ((hours <= 10 && minutes < 30) || hours <= 9) {
       errors.push({
-        message: `Periodic Tables opens at 10:30 AM.`,
+        message: `Periodic Tables opens at 10:30 AM. It'll be worth waiting for!`,
       });
     }
 
     if ((hours >= 21 && minutes > 30) || hours >= 22) {
       errors.push({
-        message: `Periodic Tables stops accepting reservations at 9:30 PM.`,
+        message: `Periodic Tables stops accepting reservations at 9:30 PM. Please choose a different time.`,
       });
     }
 
@@ -88,7 +88,7 @@ function EditReservationForm() {
 
     if (formData.people < 1) {
       errors.push({
-        message: `Bookings must include at least 1 guest`,
+        message: `Bookings must include a minimum of 1 guest.`,
       });
     }
 

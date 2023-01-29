@@ -3,11 +3,11 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "../dashboard/Dashboard";
 import NotFound from "./NotFound";
 import { today } from "../utils/date-time";
-import NewReservation from "./new-reservations/EditReservation";
+import NewReservation from "./new-reservations/NewReservation";
 import useQuery from "../utils/useQuery";
-//import NewTable from "../tables/NewTable";
+import NewTable from "../tables/NewTable";
 import Seat from "./new-reservations/newSeat";
-//import Search from "../search/Search";
+import Search from "../search/Search";
 import EditReservation from "./new-reservations/EditReservation";
 
 /**
@@ -41,12 +41,12 @@ function Routes() {
       <Route path="/dashboard">
         <Dashboard date={date || today()} />
       </Route>
-      {/* <Route path="/tables/new">
+      <Route path="/tables/new">
         <NewTable />
-      </Route> */}
-      {/* <Route path="/search">
+      </Route>
+      <Route path="/search">
         <Search />
-      </Route> */}
+      </Route>
       <Route>
         <NotFound />
       </Route>

@@ -27,7 +27,9 @@ function Dashboard({ date }) {
     listReservations({ date }, abortController.signal)
       .then(setReservations)
       .catch(setReservationsError);
-    listTables(abortController.signal).then(setTables).catch(setTablesError);
+    listTables(abortController.signal)
+      .then(setTables)
+      .catch(setTablesError);
     return () => abortController.abort();
   }
 
@@ -41,7 +43,15 @@ function Dashboard({ date }) {
           reservation={reservation}
         />
       );
-    }
+    } else if (reservation.status === "seated") {
+        return (
+          <Reservation
+            loadDashboard={loadDashboard}
+            key={reservation.reservation_id}
+            reservation={reservation}
+          />
+        );
+      }
   });
 
   const tableList = tables.map((table) => (

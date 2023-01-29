@@ -15,7 +15,7 @@ function Reservation({ reservation, loadDashboard }) {
   function handleClick() {
     if (
       window.confirm(
-        "Are you sure you want to cancel this reservation? This cannot be undone."
+        "Do you want to cancel this reservation?"
       )
     ) {
       const abortController = new AbortController();
@@ -103,6 +103,8 @@ function Reservation({ reservation, loadDashboard }) {
                 >
                   Seat
                 </a>
+              ) || status === "seated" && (
+                <p></p>
               )}
               <a href={`/reservations/${reservation_id}/edit`}>
                 <button className="btn dark-green-button mr-2">
@@ -120,7 +122,7 @@ function Reservation({ reservation, loadDashboard }) {
           </div>
         </div>
       </div>
-      {/* {status === "booked" && (
+      {status === "booked" && (
         <a
           href={`/reservations/${reservation_id}/seat`}
           role="button"
@@ -130,7 +132,9 @@ function Reservation({ reservation, loadDashboard }) {
             Seat
           </h5>
         </a>
-      )} */}
+      ) || status === "seated" && (
+        <a></a>
+      )}
     </div>
   );
 }

@@ -68,7 +68,7 @@ async function validateProperties(req, res, next) {
   try {
     if (!validateDate(reservation_date)) {
       const error = new Error(
-        `'${reservation_date}' is invalid 'reservation_date' format. Use YYYY-MM-DD`
+        `'${reservation_date}' is an invalid 'reservation_date' format. Use YYYY-MM-DD`
       );
       error.status = 400;
       throw error;
@@ -76,20 +76,20 @@ async function validateProperties(req, res, next) {
 
     if (!validateTime(reservation_time)) {
       const error = new Error(
-        `'${reservation_time}' is invalid 'reservation_time' format. Use HH:MM:SS`
+        `'${reservation_time}' is an invalid 'reservation_time' format. Use HH:MM:SS`
       );
       error.status = 400;
       throw error;
     }
 
     if (typeof people !== "number") {
-      const error = new Error(`people must be a number`);
+      const error = new Error(`"people" must be a number.`);
       error.status = 400;
       throw error;
     }
 
     if (people < 1) {
-      const error = new Error(`people must be at least 1`);
+      const error = new Error(`"people" must be at least 1.`);
       error.status = 400;
       throw error;
     }
@@ -197,7 +197,7 @@ async function notFinished(req, res, next) {
   if (status === "finished") {
     return next({
       status: 400,
-      message: `a finished reservation cannot be updated`,
+      message: `A "finished" reservation cannot be updated.`,
     });
   }
   next();
@@ -212,7 +212,10 @@ module.exports = {
     validateReservationTime,
     asyncErrorBoundary(create),
   ],
-  read: [asyncErrorBoundary(reservationExists), asyncErrorBoundary(read)],
+  read: [
+    asyncErrorBoundary(reservationExists), 
+    asyncErrorBoundary(read)
+  ],
   update: [
     asyncErrorBoundary(reservationExists),
     hasProperties(...REQUIRED_PROPERTIES),

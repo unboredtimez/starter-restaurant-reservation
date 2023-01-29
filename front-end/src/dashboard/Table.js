@@ -18,7 +18,6 @@ function Table({ table, loadDashboard }) {
       <div className="card-body new-card-body">
         <div className="container">
           <div className="row d-flex">
-
             {table.reservation_id ? (
               <div
                 data-table-id-finish={table.table_id}
@@ -26,9 +25,7 @@ function Table({ table, loadDashboard }) {
                 role="button"
                 className="col btn green-button rounded mr-2"
               >
-                <h5 className="text-center mb-1">
-                  Finish
-                </h5>
+                <h5 className="text-center mb-1">Finish</h5>
               </div>
             ) : (
               <h5 className="col card-title mb-0 justify-content-center align-self-center">
