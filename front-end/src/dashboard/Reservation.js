@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { cancelReservation } from "../utils/api";
 import "../layout/Layout.css";
 
@@ -96,21 +97,21 @@ function Reservation({ reservation, loadDashboard }) {
 
             <div className="col col-8 card-text text-right d-flex justify-content-end pr-0 ">
               {status === "booked" && (
-                <a
-                  href={`/reservations/${reservation_id}/seat`}
+                <Link
+                  to={`/reservations/${reservation_id}/seat`}
                   role="button"
                   className="btn green-button mr-2"
                 >
                   Seat
-                </a>
+                </Link>
               ) || status === "seated" && (
                 <p></p>
               )}
-              <a href={`/reservations/${reservation_id}/edit`}>
+              <Link to={`/reservations/${reservation_id}/edit`}>
                 <button className="btn dark-green-button mr-2">
                   Edit
                 </button>
-              </a>
+              </Link>
               <button
                 className="btn red-button mr-2"
                 data-reservation-id-cancel={reservation.reservation_id}
