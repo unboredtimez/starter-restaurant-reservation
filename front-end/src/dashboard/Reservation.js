@@ -124,15 +124,15 @@ function Reservation({ reservation, loadDashboard }) {
         </div>
       </div>
       {status === "booked" && (
-        <a
-          href={`/reservations/${reservation_id}/seat`}
+        <Link
+          to={`/reservations/${reservation_id}/seat`}
           role="button"
           className="card-footer green-button text-decoration-none"
         >
           <h5 className="text-center text-decoration-none mb-1">
             Seat
           </h5>
-        </a>
+        </Link>
       ) || status === "seated" && (
         <a></a>
       )}
