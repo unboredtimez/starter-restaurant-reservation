@@ -6,7 +6,7 @@
 
 ## Description
 
-This is a Restaurant Reservation System. This system allows the restaurant to create, update, view, delete reservations, as well as seat customers at varius tables within the restaurant.
+This is a Restaurant Reservation System. This system allows the restaurant to create, update, view, delete reservations, as well as seat customers at various tables within the restaurant.
 
 ## API Documentation: 
 
